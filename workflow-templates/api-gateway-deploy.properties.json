@@ -1,0 +1,12 @@
+{
+    "name": "Deploy to Cloudflare Workers",
+    "description": "Deploy to Cloudflare Workers template.",
+    "iconName": "example-icon",
+    "categories": [
+        "JavaScript"
+    ],
+    "filePatterns": [
+        "wrangler.toml",
+        "worker.js"
+    ]
+}
