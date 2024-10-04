@@ -2,7 +2,7 @@ name: Support Ticket
 description: Create a support ticket here so our support team can review and help you as soon as possible!
 title: "[SUPPORT]: "
 labels: ["support"]
-projects: ["Support"]
+projects: ["GY-CODING/10"]
 assignees: ["gy-toxyc"]
 body:
   - type: markdown
