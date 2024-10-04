@@ -1,20 +1,19 @@
-name: 🐛Bug Report
-description: File a bug report here
-title: "[BUG]: "
-labels: ["bug"]
-assignees: ["AnishDe12020"]
+name: Support Ticket
+description: Create a support ticket here so our support team can review and help you as soon as possible!
+title: "[SUPPORT]: "
+labels: ["support"]
+assignees: ["gy-toxyc"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report 🤗
-        Make sure there aren't any open/closed issues for this topic 😃
+        Fill in this information and we will try to reproduce, review and solve your problems or questions as soon as possible!
 
   - type: textarea
-    id: bug-description
+    id: issue-description
     attributes:
-      label: Description of the bug
-      description: Give us a brief description of what happened and what should have happened
+      label: Description of the problem
+      description: Give us a brief description of what happened.
     validations:
       required: true
 
@@ -22,17 +21,18 @@ body:
     id: steps-to-reproduce
     attributes:
       label: Steps To Reproduce
-      description: Steps to reproduce the behavior.
+      description: Steps to reproduce the behavior, so we can help you in a better way.
       placeholder: |
-        1. Go to '...'
-        2. Click on '...'
-        3. Scroll down to '...'
-        4. See error
+        1. Go to...
+        2. Click on...
+        3. Scroll down to...
+        4. Error received...
     validations:
       required: true
+
   - type: textarea
     id: additional-information
     attributes:
       label: Additional Information
       description: |
-        Provide any additional information such as logs, screenshots, likes, scenarios in which the bug occurs so that it facilitates resolving the issue.
+        Provide any additional information such as logs, screenshots, scenarios, specifications (OS, hardware, etc) in which the problem occurs so that it facilitates resolving the issue.
