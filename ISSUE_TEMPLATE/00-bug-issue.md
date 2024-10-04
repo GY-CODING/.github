@@ -1,7 +1,7 @@
 ---
 name: Support Ticket
 about: Use this template to create a ticket that our support team will review and solve as soon as possible.
-labels: type:support
+labels: type:bug
 ---
 
 Explain the issues you're experiencing briefly here.
