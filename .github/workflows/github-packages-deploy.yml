@@ -18,11 +18,11 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
           server-id: github
-          settings-path: ${{ input.workspace }}
+          settings-path: ${{ inputs.workspace }}
 
       - name: Write settings.xml
         run: |
-          cat << EOF > ${{ input.workspace }}/settings.xml
+          cat << EOF > ${{ inputs.workspace }}/settings.xml
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
@@ -59,4 +59,4 @@ jobs:
           EOF
 
       - name: Publish to GitHub Packages
-        run: mvn deploy --settings ${{ input.workspace }}/settings.xml
+        run: mvn deploy --settings ${{ inputs.workspace }}/settings.xml
