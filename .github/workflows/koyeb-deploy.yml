@@ -1,7 +1,10 @@
-name: Deploy to GitHub Packages
+name: Deploy to Koyeb
 on:
-  workflow_call
+  push:
+    branches:
+      - master
 
+# This is not correct, just to fulfill.
 jobs:
   build:
     runs-on: ubuntu-latest
