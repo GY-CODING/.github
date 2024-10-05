@@ -6,12 +6,15 @@ on:
       CF_API_TOKEN:
         required: true
         type: string
+        default: ${{ secrets.CF_API_TOKEN }}
       CF_ACCOUNT_ID:
         required: true
         type: string
+        default: ${{ secrets.CF_ACCOUNT_ID }}
       CF_ZONE_ID:
         required: true
         type: string
+        default: ${{ secrets.CF_ZONE_ID }}
 
 jobs:
   deploy:
