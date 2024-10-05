@@ -3,7 +3,7 @@ description: Create a support ticket here so our support team can review and hel
 title: "[SUPPORT]: "
 labels: ["support"]
 projects: ["GY-CODING/10"]
-assignees: ["@GY-CODING/support-team"]
+assignees: ["gy-toxyc", "gy-gfigueras"]
 body:
   - type: markdown
     attributes:
