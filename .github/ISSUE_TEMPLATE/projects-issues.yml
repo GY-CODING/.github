@@ -26,10 +26,8 @@ body:
   - type: textarea
     id: closing-remark
     attributes:
-      label: Closing Remark
-      description: |
-        In order for this issue to be closed, all tasks should be completed.
-      placeholder: |
+      label: <br>
+      value: |
         In order for this issue to be closed, all tasks should be completed.
     validations:
       required: false
