@@ -11,20 +11,10 @@ body:
     validations:
       required: true
 
-  # Just a workaround to get a <br> into the Markdown processed for the issue.
-  - type: textarea
-    id: line-jump
-    attributes:
-      label: <br>
-      value: |
-        &#160;
-    validations:
-      required: false
-
   - type: textarea
     id: tasks
     attributes:
-      label: Tasks
+      label: <br>Tasks
       description: Tasks to be done before closing this issue.
       placeholder: |
         - [ ] Task 1.
