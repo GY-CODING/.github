@@ -1,6 +1,6 @@
 name: Project Issue
 description: Create a project issue using this template.
-title: ""
+title: "> "
 labels: []
 body:
   - type: markdown
