@@ -17,16 +17,11 @@ body:
       label: Tasks
       description: Tasks to be done before closing this issue.
       placeholder: |
-        - [] Task 1.
-        - [] Task 2.
-        - [] Task 3.
+        - [ ] Task 1.
+        - [ ] Task 2.
+        - [ ] Task 3.
     validations:
       required: true
-      
-  - type: markdown
-    attributes:
-      value: |
-        In order for this issue to be closed, all tasks should be completed.
 
   - type: textarea
     id: additional-information
@@ -34,3 +29,8 @@ body:
       label: Additional Information
       description: |
         Provide any additional information that may help the developing or approaching of this issue.
+
+  - type: markdown
+    attributes:
+      value: |
+        In order for this issue to be closed, all tasks should be completed.
