@@ -1,0 +1,36 @@
+name: Project Issue
+description: Create a project issue using this template.
+title: "> "
+labels: []
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Description of the objective
+      description: Give a brief description of the aim of this issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Tasks to be done before closing this issue.
+      placeholder: |
+        - [] Task 1.
+        - [] Task 2.
+        - [] Task 3.
+    validations:
+      required: true
+      
+  - type: markdown
+    attributes:
+      value: |
+        In order for this issue to be closed, all tasks should be completed.
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional Information
+      description: |
+        Provide any additional information that may help the developing or approaching of this issue.
