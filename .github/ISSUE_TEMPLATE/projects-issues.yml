@@ -11,6 +11,16 @@ body:
     validations:
       required: true
 
+  # Just a workaround to get a <br> into the Markdown processed for the issue.
+  - type: textarea
+    id: line-jump
+    attributes:
+      label: <br>
+      value: |
+         
+    validations:
+      required: false
+
   - type: textarea
     id: tasks
     attributes:
@@ -23,12 +33,13 @@ body:
     validations:
       required: true
 
+  # Just a workaround to get a hardcoded text into the Markdown processed for the issue.
   - type: textarea
     id: closing-remark
     attributes:
-      label: <br>
+      label:  
       value: |
-        In order for this issue to be closed, all tasks should be completed.
+        In order for this issue to be closed, all tasks should be completed.<br>
     validations:
       required: false
 
