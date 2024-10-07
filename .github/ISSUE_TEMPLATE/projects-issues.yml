@@ -6,7 +6,7 @@ body:
   - type: textarea
     id: objective
     attributes:
-      label: Description of the objective<hr>
+      label: Description of the objective
       description: Give a brief description of the aim of this issue.
       value: |
         The purpose of this issue is to 
@@ -16,7 +16,7 @@ body:
   - type: textarea
     id: tasks
     attributes:
-      label: <br>Tasks<hr>
+      label: <br>Tasks
       description: Tasks to be done before closing this issue.
       placeholder: |
         - [ ] Task 1.
@@ -38,7 +38,7 @@ body:
   - type: textarea
     id: additional-information
     attributes:
-      label: <br>Additional Information<hr>
+      label: <br>Additional Information
       description: |
         Provide any additional information that may help the developing or approaching of this issue.
     validations:
