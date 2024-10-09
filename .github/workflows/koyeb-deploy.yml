@@ -3,6 +3,9 @@ name: Deploy to Koyeb
 on:
   workflow_call:
     inputs:
+      project-app:
+        type: string
+        required: true
       project-name:
         type: string
         required: true
