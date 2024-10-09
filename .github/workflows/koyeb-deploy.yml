@@ -89,11 +89,13 @@ jobs:
       # - name: Push Docker image to GitHub Packages
       #   run: docker push ghcr.io/gy-coding/${{ inputs.project-name }}:latest
 
-      - name: Login to Koyeb
+      - name: Create Koyeb Config File
         env:
           PATH: /home/runner/.koyeb/bin:$PATH
           KOYEB_API_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
-        run: koyeb login --token $KOYEB_API_TOKEN
+        run: |
+          mkdir -p ~/.koyeb
+          echo "token: ${KOYEB_API_TOKEN}" > ~/.koyeb/koyeb.yaml
 
       - name: Deploy to Koyeb
         env:
