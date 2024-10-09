@@ -14,87 +14,18 @@ on:
         required: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
-
-      # - name: Set up JDK 17
-      #   uses: actions/setup-java@v2
-      #   with:
-      #     java-version: '17'
-      #     distribution: 'temurin'
-          
       - name: Install Koyeb CLI
         run: curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
-
-      # - name: Grant execute permission for Maven Wrapper
-      #   run: chmod +x ./mvnw
-
-      # - name: Setup Maven settings
-      #   run: |
-      #     mkdir -p ~/.m2
-      #     cat <<EOF > ~/.m2/settings.xml
-      #     <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-      #       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      #       xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-      #       <activeProfiles>
-      #         <activeProfile>github</activeProfile>
-      #       </activeProfiles>
-      #       <profiles>
-      #         <profile>
-      #           <id>github</id>
-      #           <repositories>
-      #             <repository>
-      #               <id>central</id>
-      #               <url>https://repo1.maven.org/maven2</url>
-      #             </repository>
-      #             <repository>
-      #               <id>github</id>
-      #               <url>https://maven.pkg.github.com/GY-CODING/spring-exceptions</url>
-      #               <snapshots>
-      #                 <enabled>true</enabled>
-      #               </snapshots>
-      #             </repository>
-      #           </repositories>
-      #         </profile>
-      #       </profiles>
-      #       <servers>
-      #         <server>
-      #           <id>github</id>
-      #           <username>${{ secrets.PACKAGE_USERNAME }}</username>
-      #           <password>${{ secrets.PACKAGE_TOKEN }}</password>
-      #         </server>
-      #       </servers>
-      #     </settings>
-      #     EOF
-      
-      # - name: Build Spring Boot app
-      #   run: ./mvnw package -DskipTests
-
-      # - name: Build Docker image
-      #   env:
-      #     SPRING_PROFILE: ${{ secrets.SPRING_PROFILE }}
-      #     SPRING_PORT: ${{ secrets.SPRING_PORT }}
-      #     FOTG_MONGO_URI: ${{ secrets.FOTG_MONGO_URI }}
-      #     GITHUB_USERNAME: ${{ secrets.PACKAGE_USERNAME }}
-      #     GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-      #   run: docker build --build-arg SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} --build-arg SPRING_PORT=${{ secrets.SPRING_PORT }} --build-arg FOTG_MONGO_URI=${{ secrets.FOTG_MONGO_URI }} --build-arg GITHUB_USERNAME=${{ secrets.PACKAGE_USERNAME }} --build-arg GITHUB_TOKEN=${{ secrets.PACKAGE_TOKEN }} -t ghcr.io/gy-coding/${{ inputs.project-name }}:latest .
-
-      # - name: Login to GitHub Packages
-      #   run: echo ${{ secrets.PACKAGE_TOKEN }} | docker login ghcr.io -u ${{ secrets.PACKAGE_USERNAME }} --password-stdin
-
-      # - name: Push Docker image to GitHub Packages
-      #   run: docker push ghcr.io/gy-coding/${{ inputs.project-name }}:latest
 
       - name: Create Koyeb Config File
         env:
           PATH: /home/runner/.koyeb/bin:$PATH
           KOYEB_API_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
         run: |
-          mkdir -p ~/.koyeb
           echo "token: ${KOYEB_API_TOKEN}" > ~/.koyeb/koyeb.yaml
 
       - name: Deploy to Koyeb
