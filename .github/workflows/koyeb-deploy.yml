@@ -1,61 +1,41 @@
 name: Deploy to Koyeb
-on:
-  push:
-    branches:
-      - master
 
-# This is not correct, just to fulfill.
+on:
+  workflow_call:
+    inputs:
+      project-name:
+        type: string
+        required: true
+      project-id:
+        type: string
+        required: true
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'adopt'
-          server-id: github
-          settings-path: ${{ github.workspace }}
 
-      - name: Write settings.xml
+      - name: Build Spring Boot app
+        run: ./mvnw package -DskipTests
+
+      - name: Build Docker image
+        run: docker build -t ${{ inputs.project-name }}:latest .
+
+      - name: Save Docker image as tar file
+        run: docker save ${{ inputs.project-name }}:latest -o ./${{ inputs.project-name }}.tar
+
+      - name: Deploy to Koyeb
         run: |
-          cat << EOF > ${{ github.workspace }}/settings.xml
-          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                                http://maven.apache.org/xsd/settings-1.0.0.xsd">
-            <activeProfiles>
-              <activeProfile>github</activeProfile>
-            </activeProfiles>
-            <profiles>
-              <profile>
-                <id>github</id>
-                <repositories>
-                  <repository>
-                    <id>central</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                  </repository>
-                  <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/GY-CODING/spring-exceptions</url>
-                    <snapshots>
-                      <enabled>true</enabled>
-                    </snapshots>
-                  </repository>
-                </repositories>
-              </profile>
-            </profiles>
-            <servers>
-              <server>
-                <id>github</id>
-                <username>gy-toxyc</username>
-                <password>${{ secrets.GITHUB_TOKEN }}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-
-      - name: Publish to GitHub Packages
-        run: mvn deploy --settings ${{ github.workspace }}/settings.xml
+          curl -X POST https://app.koyeb.com/v1/apps/${{ inputs.project-id }}/deployments \
+            -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -F "file=@./${{ inputs.project-name }}.tar" \
+            -F 'deploy={ "image": "docker.io/library/${{ inputs.project-name }}:latest" }'
