@@ -79,14 +79,15 @@ jobs:
 
       - name: Save Docker image as tar file
         run: docker save ${{ inputs.project-name }}:latest -o ./${{ inputs.project-name }}.tar
-
+      
       - name: Compress Docker image
         run: gzip ./${{ inputs.project-name }}.tar
-  
+      
       - name: Deploy to Koyeb
         run: |
           curl -X POST https://app.koyeb.com/v1/apps/${{ inputs.project-id }}/deployments \
             -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -F "file=@./${{ inputs.project-name }}.tar" \
+            -F "file=@./${{ inputs.project-name }}.tar.gz" \
             -F 'deploy={ "image": "docker.io/library/${{ inputs.project-name }}:latest" }'
+
