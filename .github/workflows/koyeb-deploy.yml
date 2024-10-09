@@ -90,8 +90,9 @@ jobs:
             -H "Content-Type: application/json"
 
       - name: Deploy to Koyeb
-        run: |
-          curl -X POST https://app.koyeb.com/v1/apps/${{ inputs.project-id }}/deployments \
-            -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            -d '{"image": "ghcr.io/gy-coding/'${{ inputs.project-name }}':latest"}'
+        # run: |
+        #   curl -X POST https://app.koyeb.com/v1/apps/${{ inputs.project-id }}/deployments \
+        #     -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
+        #     -H "Content-Type: application/json" \
+        #     -d '{"image": "ghcr.io/gy-coding/'${{ inputs.project-name }}':latest"}'
+        run: curl -X GET https://app.koyeb.com/deploy?name=${{ inputs.project-name }}&type=git&repository=GY-CODING%2F${{ inputs.project-name }}&branch=main&builder=dockerfile&env%5BFOTG_MONGO_URI%5D=${{ secrets.FOTG_MONGO_URI }}&env%5BGITHUB_TOKEN%5D=${{ secrets.PACKAGE_TOKEN }}&env%5BGITHUB_USERNAME%5D=${{ secrets.PACKAGE_USERNAME }}&env%5BSPRING_PORT%5D=${{ secrets.SPRING_PORT }}&env%5BSPRING_PROFILE%5D=${{ secrets.SPRING_PROFILE }}&ports=${{ secrets.SPRING_PORT }}%3Bhttp%3B%2F&hc_protocol%5B8003%5D=http&hc_grace_period%5B8003%5D=30&hc_restart_limit%5B8003%5D=5&hc_timeout%5B8003%5D=30&hc_path%5B${{ secrets.SPRING_PORT }}%5D=%2Factuator%2Fhealth
