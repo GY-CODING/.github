@@ -36,7 +36,7 @@ jobs:
             --archive-builder docker
             --archive-docker-dockerfile ./Dockerfile
             --type WEB \
-            --instance-type nano \
+            --instance-type micro \
             --ports ${{ secrets.SPRING_PORT }} \
             --env SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} \
             --env SPRING_PORT=${{ secrets.SPRING_PORT }} \
