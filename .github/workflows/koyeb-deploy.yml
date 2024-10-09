@@ -75,7 +75,13 @@ jobs:
           FOTG_MONGO_URI: ${{ secrets.FOTG_MONGO_URI }}
           GITHUB_USERNAME: ${{ secrets.PACKAGE_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-        run: docker build -t ${{ inputs.project-name }}:latest .
+        run: docker build \
+              --build-arg SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} \
+              --build-arg SPRING_PORT=${{ secrets.SPRING_PORT }} \
+              --build-arg FOTG_MONGO_URI=${{ secrets.FOTG_MONGO_URI }} \
+              --build-arg GITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }} \
+              --build-arg GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} \
+          -t ${{ inputs.project-name }}:latest .
 
       - name: Save Docker image as tar file
         run: docker save ${{ inputs.project-name }}:latest -o ./${{ inputs.project-name }}.tar
