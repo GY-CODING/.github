@@ -75,17 +75,17 @@ jobs:
           FOTG_MONGO_URI: ${{ secrets.FOTG_MONGO_URI }}
           GITHUB_USERNAME: ${{ secrets.PACKAGE_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-        run: docker build --build-arg SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} --build-arg SPRING_PORT=${{ secrets.SPRING_PORT }} --build-arg FOTG_MONGO_URI=${{ secrets.FOTG_MONGO_URI }} --build-arg GITHUB_USERNAME=${{ secrets.PACKAGE_USERNAME }} --build-arg GITHUB_TOKEN=${{ secrets.PACKAGE_TOKEN }} -t ghcr.io/${{ github.repository }}/${{ inputs.project-name }}:latest .
+        run: docker build --build-arg SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} --build-arg SPRING_PORT=${{ secrets.SPRING_PORT }} --build-arg FOTG_MONGO_URI=${{ secrets.FOTG_MONGO_URI }} --build-arg GITHUB_USERNAME=${{ secrets.PACKAGE_USERNAME }} --build-arg GITHUB_TOKEN=${{ secrets.PACKAGE_TOKEN }} -t ghcr.io/gy-coding/${{ inputs.project-name }}:latest .
 
       - name: Login to GitHub Packages
         run: echo ${{ secrets.PACKAGE_TOKEN }} | docker login ghcr.io -u ${{ secrets.PACKAGE_USERNAME }} --password-stdin
 
       - name: Push Docker image to GitHub Packages
-        run: docker push ghcr.io/${{ github.repository }}/${{ inputs.project-name }}:latest
+        run: docker push ghcr.io/gy-coding/${{ inputs.project-name }}:latest
 
       - name: Deploy to Koyeb
         run: |
           curl -X POST https://app.koyeb.com/v1/apps/${{ inputs.project-id }}/deployments \
             -H "Authorization: Bearer ${{ secrets.KOYEB_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            -d '{"image": "ghcr.io/'${{ github.repository }}'/${{ inputs.project-name }}:latest"}'
+            -d '{"image": "ghcr.io/gy-coding/'${{ inputs.project-name }}':latest"}'
