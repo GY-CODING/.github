@@ -28,7 +28,7 @@ jobs:
         run: curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
 
       - name: Setup Koyeb Command to PATH
-        run: export PATH=$HOME/.koyeb/bin:$PATH
+        run: export PATH="/home/runner/.koyeb/bin:$PATH"
 
       - name: Grant execute permission for Maven Wrapper
         run: chmod +x ./mvnw
