@@ -94,8 +94,8 @@ jobs:
           PATH: /home/runner/.koyeb/bin:$PATH
         run: |
           koyeb deploy . ${{ inputs.project-app }}/${{ inputs.project-name }} \
-            --archive-builder: docker
-            --archive-docker-dockerfile: ./Dockerfile
+            --archive-builder docker
+            --archive-docker-dockerfile ./Dockerfile
             --type WEB \
             --instance-type nano \
             --ports ${{ secrets.SPRING_PORT }} \
