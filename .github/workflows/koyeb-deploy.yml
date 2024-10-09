@@ -26,9 +26,13 @@ jobs:
           
       - name: Install Koyeb CLI
         run: curl -fsSL https://raw.githubusercontent.com/koyeb/koyeb-cli/master/install.sh | sh
-
-      - name: Setup Koyeb Command to PATH
-        run: export PATH="/home/runner/.koyeb/bin:$PATH"
+        
+      - name: Add Koyeb CLI to PATH
+        shell: bash
+        run: echo 'export PATH="/home/runner/.koyeb/bin:$PATH"' >> ~/.bashrc
+      - name: Source bashrc
+        shell: bash
+        run: source ~/.bashrc
 
       - name: Grant execute permission for Maven Wrapper
         run: chmod +x ./mvnw
