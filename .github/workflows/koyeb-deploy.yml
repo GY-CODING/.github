@@ -94,10 +94,11 @@ jobs:
           PATH: /home/runner/.koyeb/bin:$PATH
         run: |
           koyeb deploy . ${{ inputs.project-app }}/${{ inputs.project-name }} \
-            --type "WEB" \
+            --archive-builder: docker
+            --archive-docker-dockerfile: ./Dockerfile
+            --type WEB \
             --instance-type nano \
             --ports ${{ secrets.SPRING_PORT }} \
-            --docker ghcr.io/gy-coding/${{ inputs.project-name }}:latest \
             --env SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} \
             --env SPRING_PORT=${{ secrets.SPRING_PORT }} \
             --env FOTG_MONGO_URI=${{ secrets.FOTG_MONGO_URI }} \
