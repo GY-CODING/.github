@@ -90,11 +90,10 @@ jobs:
         env:
           PATH: /home/runner/.koyeb/bin:$PATH
         run: |
-          koyeb service create ${{ inputs.project-name }} \
-            --id ${{ inputs.project-id }} \
-            --type docker \
+          koyeb deploy . ${{ inputs.project-app }}/${{ inputs.project-name }} \
+            --type "WEB" \
             --instance-type nano \
-            --ports 8003 \
+            --ports ${{ secrets.SPRING_PORT }} \
             --docker ghcr.io/gy-coding/${{ inputs.project-name }}:latest \
             --env SPRING_PROFILE=${{ secrets.SPRING_PROFILE }} \
             --env SPRING_PORT=${{ secrets.SPRING_PORT }} \
