@@ -93,7 +93,7 @@ jobs:
         env:
           PATH: /home/runner/.koyeb/bin:$PATH
           KOYEB_API_TOKEN: ${{ secrets.KOYEB_API_TOKEN }}
-        run: koyeb auth login --token $KOYEB_API_TOKEN
+        run: koyeb login --token $KOYEB_API_TOKEN
 
       - name: Deploy to Koyeb
         env:
