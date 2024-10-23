@@ -11,16 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'adopt'
-          server-id: github
-          settings-path: ${{ github.workspace }}
-
-      - name: Write settings.xml
+    - name: Write settings.xml
         run: |
           cat << EOF > ${{ github.workspace }}/settings.xml
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
@@ -64,6 +55,15 @@ jobs:
             </servers>
           </settings>
           EOF
+          
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          server-id: github
+          settings-path: ${{ github.workspace }}
 
       - name: Publish to GitHub Packages
         run: mvn deploy --settings ${{ github.workspace }}/settings.xml
