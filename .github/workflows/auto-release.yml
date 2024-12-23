@@ -1,7 +1,7 @@
 name: Auto Tag & Release
 
 on:
-  workflow_call: # Asegúrate de que este disparador esté presente
+  workflow_call:
 
 jobs:
   tag-and-release:
@@ -19,11 +19,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Husky and increment version
-      run: |
-        npm run format
-        npm run lint
-        npm run release:patch
+    - name: Run release:patch to increment version
+      run: npm run release:patch
       shell: bash
 
     - name: Get current version from package.json
