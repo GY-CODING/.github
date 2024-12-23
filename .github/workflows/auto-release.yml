@@ -1,7 +1,7 @@
 name: Auto Tag & Release
 
 on:
-  workflow_call:
+  workflow_call: # Asegúrate de que este disparador esté presente
 
 jobs:
   tag-and-release:
@@ -19,6 +19,12 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Configure Git identity
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      shell: bash
+
     - name: Run release:patch to increment version
       run: npm run release:patch
       shell: bash
@@ -32,8 +38,6 @@ jobs:
 
     - name: Commit and push version update
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
         git add package.json package-lock.json CHANGELOG.md
         git commit -m "chore(release): bump version to v${{ env.current_version }}"
         git push
