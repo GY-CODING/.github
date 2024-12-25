@@ -2,10 +2,11 @@ name: Deploy to GitHub Pages
 
 on:
   workflow_call:
-    secrets:
+    inputs:
       domain:
         description: 'Domain where the website will be deployed.'
         required: true
+        type: string
 
 jobs:
   build-and-deploy:
@@ -36,7 +37,7 @@ jobs:
           NEXT_IGNORE_PLATFORM_CHECK: 1
 
       - name: Create CNAME file
-        run: echo ${{ secrets.domain }} > ./out/CNAME
+        run: echo ${{ inputs.domain }} > ./out/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
