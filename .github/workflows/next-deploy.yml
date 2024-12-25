@@ -2,6 +2,10 @@ name: Deploy to GitHub Pages
 
 on:
   workflow_call:
+    secrets:
+      domain:
+        description: 'Domain where the website will be deployed.'
+        required: true
 
 jobs:
   build-and-deploy:
@@ -17,7 +21,7 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Clean and install dependencies
+      - name: Clean install dependencies
         run: |
           rm -rf node_modules
           rm -f package-lock.json
@@ -30,6 +34,9 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
           NEXT_IGNORE_PLATFORM_CHECK: 1
+
+      - name: Create CNAME file
+        run: echo ${{ secrets.domain }} > ./out/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
