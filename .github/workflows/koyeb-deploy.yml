@@ -2,6 +2,10 @@ name: Deploy to Koyeb
 
 on:
   workflow_call:
+    inputs:
+      serviceID:
+        type: string
+        required: true
 
 jobs:
   deploy:
@@ -10,9 +14,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Instalar jq
+        run: sudo apt-get install jq
+
+      - name: LogIn to Koyeb y almacenar token
+        run: |
+          BEARER_TOKEN=$(curl -X POST "https://app.koyeb.com/v1/account/login" \
+          -H "Content-Type: application/json" \
+          -d '{"email": "${{ secrets.KOYEB_EMAIL }}", "password": "${{ secrets.KOYEB_PASSWORD }}"}' \
+          | jq -r '.token.id')
+          echo "BEARER_TOKEN=$BEARER_TOKEN" >> $GITHUB_ENV
         
       - name: Trigger Koyeb Deployment
         run: |
-          curl -X GET "${{ secrets.KOYEB_DEPLOY_URL }}"
-
-        
+          curl -X POST "https://app.koyeb.com/v1/services/${{ inputs.serviceID }}/redeploy" \
+          -H "Authorization: Bearer ${{ env.BEARER_TOKEN }}"
