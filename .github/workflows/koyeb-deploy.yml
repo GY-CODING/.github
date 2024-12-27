@@ -2,10 +2,6 @@ name: Deploy to Koyeb
 
 on:
   workflow_call:
-    inputs:
-      serviceID:
-        type: string
-        required: true
 
 jobs:
   deploy:
@@ -28,5 +24,5 @@ jobs:
         
       - name: Trigger Koyeb Deployment
         run: |
-          curl -X POST "https://app.koyeb.com/v1/services/${{ inputs.serviceID }}/redeploy" \
+          curl -X POST "https://app.koyeb.com/v1/services/${{ secrets.KOYEB_SERVICE_ID }}/redeploy" \
           -H "Authorization: Bearer ${{ env.BEARER_TOKEN }}"
