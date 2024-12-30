@@ -4,3 +4,12 @@ on:
   discussion:
     types: [created]
 
+jobs:
+  transfer:
+    name: Transfer Discussion to Support Ticket
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
