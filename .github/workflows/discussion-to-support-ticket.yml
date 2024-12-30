@@ -1,0 +1,6 @@
+name: Discussion to Support Ticket.
+
+on:
+  discussion:
+    types: [created]
+
