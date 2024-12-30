@@ -1,1 +1,36 @@
-dsthshsth
+title: "[SUPPORT] "
+labels: ["Support"]
+body:
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in this information and we will try to reproduce, review, and solve your problems or questions as soon as possible!
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Description of the problem
+      description: Give us a brief description of what happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior so that we can help you better.
+      placeholder: |
+        1. Go to...
+        2. Click on...
+        3. Scroll down to...
+        4. Error received...
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional Information
+      description: |
+        Provide any additional information such as logs, screenshots, scenarios, and specifications (OS, hardware, etc.) on which the problem occurs so that it facilitates resolving the issue.
