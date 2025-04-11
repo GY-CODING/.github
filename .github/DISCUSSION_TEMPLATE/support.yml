@@ -1,7 +1,6 @@
 title: "[SUPPORT] "
 labels: ["Support"]
 body:
-body:
   - type: markdown
     attributes:
       value: |
